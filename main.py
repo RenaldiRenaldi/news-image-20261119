@@ -4,10 +4,10 @@ from pathlib import Path
 
 
 def main():
-    source = Path(__file__).resolve().parent / "assets" / "entry.png"
+    artwork = Path(__file__).resolve().with_name("assets") / "entry.png"
     output = Path(os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output")
     output.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(source, output / "entry.png")
+    shutil.copyfile(artwork, output / artwork.name)
 
 
 if __name__ == "__main__":
