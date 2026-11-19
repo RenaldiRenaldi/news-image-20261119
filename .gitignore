@@ -1,3 +1,4 @@
+# Python bytecode, local entry output and transcript archives
 __pycache__/
 out/
 *.tar.gz
