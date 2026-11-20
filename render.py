@@ -109,7 +109,6 @@ def sketch(n, x, y, w, h):
         for a,b in [(2,22),(12,16),(29,25),(42,12),(66,20),(82,10),(93,24)]:
             rect(a,b,7,42-b,"#a8bfce")
         rect(0,39,100,9,"#79553e")
-        oval(9,36,92,46,"#b88550")
         for k,a in enumerate((24,49,74)):
             path([(a,39),(a,7)],INK,2)
             rect(a,7,18,14,"#f7f3e9")
@@ -124,6 +123,21 @@ def sketch(n, x, y, w, h):
             else:
                 rect(a,12,18,4.5,"#2354b0"); rect(a,16.5,18,4.5,"#ce293e")
             rect(a-2,38,5,3,INK)
+        # Draw the seated figures before the tabletop and nameplates.
+        for a,hair,tie in ((28,"#e8c95a",RED),
+                           (53,"#18202c","#3268a4"),
+                           (78,"#a5a5a2",RED)):
+            poly([(a-6,28),(a+6,28),(a+9,40),(a-9,40)],INK)
+            poly([(a-3,28),(a+3,28),(a,35)],PAPER)
+            poly([(a,30),(a+1.4,34),(a,38),(a-1.4,34)],tie)
+            oval(a-3.8,18,a+3.8,29,"#e8b98a")
+            poly([(a-4,22),(a-3.5,18),(a+2,17.5),(a+4,20),(a+3.5,22),
+                  (a+1,20.5),(a-2,21)],hair)
+        oval(9,36,94,46,"#b88550")
+        rect(13,40,77,8,"#79553e")
+        for a,name in ((28,"TRUMP"),(53,"XI"),(78,"PUTIN")):
+            rect(a-9,40,18,6,PAPER)
+            label(x+a*sx,y+41*sy,name,"b",8,INK,"mt")
     elif n == 2:
         for b in range(48):
             t=b/47
@@ -155,6 +169,8 @@ def sketch(n, x, y, w, h):
         for a in (23,38,56,71): rect(a,19,5,21,PAPER)
         path([(50,22),(50,34)],INK,1.2); path([(44,25),(56,25)],INK,1.2)
         rect(15,40,72,4,"#80785c"); rect(12,44,78,4,INK)
+        box(x+w-43,y+3,40,19,RED)
+        label(x+w-23,y+5,"9–6","b",15,PAPER,"mt")
     elif n == 5:
         oval(35,3,52,43,"#2d92b2")
         poly([(38,7),(44,5),(47,16),(42,24),(44,36),(40,36),(38,24)],"#62ad61")
@@ -162,6 +178,8 @@ def sketch(n, x, y, w, h):
         oval(68,28,76,44,RED); rect(70,9,4,26,RED)
         path([(68,29),(68,9),(72,5),(76,9),(76,29)],INK,1)
         oval(82,5,92,20,"#f7b839")
+        pen.rectangle(px(x+w-45,y+19,x+w-4,y+35),outline=RED,width=3)
+        label(x+w-24.5,y+21,"CUT","b",12,RED,"mt")
     elif n == 6:
         poly([(83,0),(100,0),(100,48),(67,48),(73,31),(70,18)],"#d3bd86")
         for phase in (0,math.pi):
@@ -194,12 +212,13 @@ def sketch(n, x, y, w, h):
         path([(17,22),(30,8),(45,22),(60,8),(79,22)],"#e5dfc8",1.5)
         path([(56,23),(62,28),(68,23)],RED,2.7)
     elif n == 11:
-        rect(0,35,100,13,"#246481")
-        poly([(15,25),(89,25),(79,41),(28,41)],INK)
-        rect(28,17,44,9,"#d6b66d"); rect(72,11,9,15,PAPER)
-        rect(73,5,3,7,INK)
-        for a in (31,46,61): rect(a,18,2,7,"#8e7246")
-        path([(8,44),(27,44),(33,47),(63,47),(70,43),(96,43)],"#afd6de",1)
+        box(x,y,w,h,"#d9e7df")
+        path([(9,7),(9,43),(49,43)],"#6e8e84",.8)
+        # These bars are symbolic; their heights do not encode a time series.
+        for a,b in ((15,28),(26,20),(37,10)):
+            rect(a,b,8,43-b,GREEN if a!=37 else RED)
+        label(x+w-7,y+3,"4.9%","h",25,RED,"rt")
+        label(x+w-8,y+h-4,"JOBLESS","m",8,INK,"rb")
     elif n == 12:
         oval(76,2,91,25,"#ef9d42")
         for a,b,ww in [(13,23,13),(29,16,9),(42,29,11),(57,17,10),(71,27,8)]: rect(a,b,ww,44-b,"#a27f59")
@@ -207,10 +226,18 @@ def sketch(n, x, y, w, h):
         path([(33.5,8),(33.5,15)],GOLD,1)
         rect(0,44,100,4,"#654c39")
     elif n == 13:
-        pen.rounded_rectangle(px(x+27*sx,y+8*sy,x+59*sx,y+24*sy),radius=8,fill=PAPER)
-        pen.rounded_rectangle(px(x+43*sx,y+8*sy,x+59*sx,y+24*sy),radius=8,fill=RED)
-        pen.rounded_rectangle(px(x+53*sx,y+28*sy,x+84*sx,y+42*sy),radius=7,fill=GREEN)
-        for a,b in ((31,35),(41,40),(71,14),(82,20)): oval(a,b,a+4,b+6,"#f5d16e")
+        for a,b in ((0,8),(17,3),(78,5),(91,12)):
+            rect(a,b,12,34-b,"#b4aa93")
+            rect(a+3,b+5,5,4,PAPER)
+        poly([(38,20),(63,20),(91,48),(10,48)],"#777b77")
+        path([(50,26),(50,33)],PAPER,1)
+        for a,b in ((20,31),(33,35),(46,30),(59,35),(72,29),(85,35)):
+            rect(a-4,b+5,8,15,INK if a%2 else GREEN)
+            oval(a-3,b-2,a+3,b+7,"#e8b98a")
+        for a,b in ((31,11),(60,8),(80,15)):
+            path([(a,b+5),(a,b+22)],INK,1)
+            rect(a-7,b,14,9,PAPER)
+            path([(a-5,b+4),(a+5,b+4)],RED,1.5)
 
 
 # Coordinates are followed by the callout's offset from the plotted point.
@@ -218,8 +245,8 @@ PLACES = [
     (114.06,22.54,-24,-11), (-74.01,40.71,3,-19), (-74.01,40.71,21,-5),
     (4.30,52.08,-14,-17), (30.71,36.90,9,12), (85.53,19.81,-10,16),
     (30.52,50.45,10,-16), (114.06,22.54,17,12), (-80.14,26.12,11,13),
-    (36.5,45.3,21,-4), (56.25,26.2,42,15), (46.68,24.71,-8,30),
-    (22.64,32.76,-9,19),
+    (36.5,45.3,21,-4), (151.21,-33.87,16,5), (46.68,24.71,-8,30),
+    (90.41,23.81,14,-16),
 ]
 
 
@@ -229,6 +256,11 @@ def world_map(x, y):
 
     def project(lon, lat):
         return (x+12+(lon+180)*scale, y+9+(83-lat)*scale)
+
+    for lon in range(-180,181,30):
+        stroke([project(lon,83),project(lon,-55)],"#3a4a6b",.5)
+    for lat in range(-30,61,30):
+        stroke([project(-180,lat),project(180,lat)],"#3a4a6b",.5)
 
     with urlopen(BASE + "ne_110m_land.geojson", timeout=20) as reply:
         land = reply.read()
@@ -246,9 +278,11 @@ def world_map(x, y):
             for boundary, color in [(outer, 1), *((hole, 0) for hole in holes)]:
                 geometry_pen.polygon([px(*project(*p)) for p in boundary], fill=color)
     canvas.paste("#dcc58d", (0,0), mask)
-    for lon, lat, name in [(-139,62,"N. AMERICA"),(-77,-18,"S. AMERICA"),(-13,71,"EUROPE"),
+    for lon, lat, name in [(-139,62,"N. AMERICA"),(-77,-18,"S. AMERICA"),(-27,80,"EUROPE"),
                            (-7,0,"AFRICA"),(86,61,"ASIA"),(122,-45,"OCEANIA")]:
-        label(*project(lon,lat), name, "m", 7, "#7497b6")
+        a,b = project(lon,lat)
+        box(a-2,b-1,measure(name,"m",9)+4,11,INK)
+        label(a,b,name,"m",9,"#c9d6e8")
     for n, (lon, lat, dx, dy) in enumerate(PLACES, 1):
         a, b = project(lon,lat)
         stroke([(a,b),(a+dx,b+dy)], RED, .8)
@@ -258,12 +292,12 @@ def world_map(x, y):
 
 
 FIGURES = (
-    ("$81.3bn","Anthropic IPO priced 18 Nov"),
+    ("$81.3bn","Anthropic IPO · record debut"),
     ("17.1m","GTA VI pre-orders · Sensor Tower est."),
     ("72,000","Odisha evacuated · 19 Nov briefing"),
     ("$120bn","COP31 draft proposal · no deal yet"),
-    ("13 years","Since GTA V first launched"),
-    ("15.3 in","Broward rain · 24h to 18 Nov"),
+    ("9–6","World Court genocide vote"),
+    ("15.3 in","Broward rain · schools shut"),
 )
 
 
@@ -271,14 +305,16 @@ def front_page():
     rows = items()
     counts = Counter(row[1] for row in rows)
     box(0,0,1024,8,RED)
-    label(23,20,"T H E   D A I L Y   A T L A S","m",11,RED)
+    label(23,20,"THE WORLD IN ONE PICTURE","m",11,RED)
     label(1001,20,"THURSDAY 19 NOVEMBER 2026","m",12,RED,"rt")
-    label(512,38,"THE WORLD IN ONE PICTURE","h",61,INK,"mt",978)
-    label(512,103,"Shenzhen summit  /  GTA VI launches  /  Record Anthropic IPO  /  Rohingya genocide case  /  Cyclone Akvan","b",14,INK,"mt",980)
+    label(512,38,"Thursday 19 November 2026","h",61,INK,"mt",978)
+    label(512,103,"Trump, Xi and Putin share one table · The World Court finds genocide in Myanmar · COP31's draft drops fossil fuels","h",14,RED,"mt",980)
     stroke([(22,126),(1002,126)], INK, 1.6)
     regions = ("Europe","Americas","Asia-Pacific","Middle East","Africa","Oceania","World")
+    region_colors = ("#355b83","#76517d","#984735","#b76428","#477154","#237576","#61696d")
     for i, region in enumerate(regions):
-        label(92+i*140,132,f"{region.upper()}  {counts[region]:02}","m",11,INK,"mt")
+        box(23+i*140,130,136,18,region_colors[i])
+        label(91+i*140,133,f"{region.upper()}  {counts[region]:02}","m",11,PAPER,"mt",130)
     box(22,152,980,60,INK)
     for i, (amount, caption) in enumerate(FIGURES):
         x = 22+i*980/6
@@ -304,7 +340,7 @@ def front_page():
             headline(x,y+h+23,title,w-1)
         else:
             label(x,y+h+19,title,"h",14,limit=w-1)
-        copy(x,y+h+(75 if hero else 38),detail,11 if hero else 10,w-1,12 if hero else 11)
+        copy(x,y+h+(73 if hero else 38),detail,11 if hero else 10,w-1,12 if hero else 11)
 
     stroke([(22,655),(1002,655)], INK, 1.6)
     label(22,662,"WHERE IT HAPPENED","h",21)
@@ -323,26 +359,19 @@ def front_page():
         stroke([(x,y-3),(x+w,y-3)], RULE, .5)
         label(x,y+1,f"{n:02}","m",10,RED)
         label(x+20,y+1,f"{place.upper()}{marker}  ·  {title}","s",11,limit=w-21)
-    label(22,955,"◇  Agenda / scheduled     †  18 Nov, carried in 19 Nov editions     ~  Forecast     ‡  Earlier context","m",9,GREEN)
+    label(22,955,"THE DAILY ATLAS  ·  ◇ Agenda / scheduled  † 18 Nov, in 19 Nov editions  ~ Forecast  ‡ Earlier context","m",9,GREEN)
     pen.rectangle(px(22,973,1002,1020),outline=RED,width=4)
-    label(31,981,"DATE CHECK","h",14,RED)
-    label(156,981,"EARLIER EVENTS ≠ NEW TODAY: pricing, deluge and Gaza operation (18 Nov); Derna seizure (17 Nov).","s",11,INK,limit=833)
-    label(156,999,"CONTEXT: COP31 draft (16 Nov); Paris poll (9 Nov); geology (4 Nov). Today’s follow-ups are dated above.","s",11,INK,limit=833)
+    label(31,981,"DATE CHECK ✓","b",11,RED)
+    label(130,981,"Every story on this page happened, or was first reported, on Thursday 19 November 2026.","s",11,INK,limit=861)
+    label(31,1000,"EARLIER EVENTS ON THIS PAGE, MARKED †/‡: pricing, deluge, Gaza operation (18 Nov); Derna seizure (17 Nov); COP31 draft (16 Nov); Paris poll (9 Nov); geology (4 Nov).","s",10,INK,limit=961)
 
     destination = ROOT / "assets" / "entry.png"
-    # Keep text antialiasing while reserving the small scenes' accent colors.
+    # Round channel values by at most two levels to improve PNG compression.
+    # The RGB output retains the antialiasing and avoids palette dithering.
     reduced = canvas.resize((1024,1024), Image.Resampling.LANCZOS)
-    palette = reduced.quantize(colors=224,method=Image.Quantize.MEDIANCUT)
-    accents = [PAPER,INK,RED,GREEN,GOLD,"#53cd86","#94e6b3","#103f30",
-               "#62ad61","#2d92b2","#ffcf65","#dc302e","#2354b0",
-               "#d3bd86","#2871b8","#f4cd43","#318bb0","#77b978",
-               "#f7b839","#dcc58d","#ed7370","#d6b66d","#edc78f",
-               "#ef9d42","#261437","#241735","#a3e7c2","#ffdb5c",
-               "#cdddea","#cadbe9","#cae8df","#e5dfc8"]
-    palette.putpalette(palette.getpalette()[:224*3]+[
-        int(color[i:i+2],16) for color in accents for i in (1,3,5)])
-    reduced.quantize(palette=palette,dither=Image.Dither.NONE).save(
-        destination, format="PNG", optimize=True)
+    channel_levels = [min(255, ((value + 2) // 4) * 4) for value in range(256)]
+    reduced = reduced.point(channel_levels * 3)
+    reduced.save(destination, format="PNG", optimize=True)
     raw = destination.read_bytes()
     assert len(raw) <= 1_048_576
     print(dict(counts), len(raw), sha256(raw).hexdigest())
